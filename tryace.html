@@ -5,17 +5,35 @@
 <style>
 body{
     margin:0;
+    width:100%;
+    height:100%;
+    }
+header{
+    padding:10px;
+    }
+.column{
+    position:relative;
+    width:30%;
+    display:inline-block;
+    }
+#application{
+    position:relative;
+    margin-top:50px;
     }
 #editor{
-    height: 600px;
-    width: 500px;
+    height: 500px;
     }
 </style>
 </head>
 
 <body>
+<header>
 <h1>Matlab WebFramework</h1>
-<div id="editor">
+</header>
+<div id="application">
+<div id="files" class="column">Visor de archivos</div>
+<div id="console" class="column">Consola de comandos</div>
+<div id="editor" class="column">
 %definicion del matlab
 function a+b; A=[1 0;3 2] %comentario
 "cadena", 'hola' %another comment
@@ -35,6 +53,6 @@ window.onload = function(){
     var MatlabScriptMode = require("ace/mode/matlab").Mode;
     editor.getSession().setMode(new MatlabScriptMode());
 };
-</script>
+</script></div>
 </body>
 </html>
