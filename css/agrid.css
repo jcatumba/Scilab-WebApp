@@ -1,0 +1,225 @@
+body, .container{
+   	margin: 0 auto;
+}
+
+.grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+   	float:left;
+   	display:inline;
+}
+
+/*---------- Medidas de AutoGrid <<<NO MODIFICAR>>> ----------*/
+
+@media screen and (min-width:1024px){
+    .container {
+    	width: 1024px;
+    }
+    .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+    	margin-left: 32px;
+    }
+    .grid1 {
+    	width: 56px;
+    }
+    .grid2 {
+    	width: 144px;
+    }
+    .grid3 {
+    	width: 232px;
+    }
+    .grid4 {
+    	width: 320px;
+    }
+    .grid5 {
+    	width: 408px;
+    }
+    .grid6 {
+    	width: 496px;
+    }
+    .grid7 {
+    	width: 584px;
+    }
+    .grid8 {
+    	width: 672px;
+    }
+    .grid9 {
+    	width: 760px;
+    }
+    .grid10 {
+    	width: 848px;
+    }
+    .grid11 {
+    	width: 936px;
+    }
+}
+
+@media screen and (max-width:1023px) and (min-width:768px){
+    .container {
+    	width: 768px;
+    }
+    .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+    	margin-left: 24px;
+    }
+    .grid1 {
+    	width: 42px;
+    }
+    .grid2 {
+    	width: 108px;
+    }
+    .grid3 {
+        width: 174px;
+    }
+    .grid4 {
+    	width: 240px;
+    }
+    .grid5 {
+    	width: 306px;
+    }
+    .grid6 {
+    	width: 372px;
+    }
+    .grid7 {
+    	width: 438px;
+    }
+    .grid8 {
+    	width: 504px;
+    }
+    .grid9 {
+    	width: 570px;
+    }
+    .grid10 {
+    	width: 636px;
+    }
+    .grid11 {
+	    width: 702px;
+    }
+}
+
+@media screen and (max-width:767px) and (min-width:480px){
+    .container {
+    	width: 480px;
+    }
+    .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+    	margin-left: 12px;
+    }
+    .grid1 {
+    	width: 29px;
+    }
+    .grid2 {
+    	width: 70px;
+    }
+    .grid3 {
+        width: 111px;
+    }
+    .grid4 {
+    	width: 152px;
+    }
+    .grid5 {
+    	width: 193px;
+    }
+    .grid6 {
+    	width: 234px;
+    }
+    .grid7 {
+    	width: 275px;
+    }
+    .grid8 {
+    	width: 316px;
+    }
+    .grid9 {
+    	width: 357px;
+    }
+    .grid10 {
+    	width: 398px;
+    }
+    .grid11 {
+    	width: 439px;
+    }
+}
+
+@media screen and (max-width:479px) and (min-width:324px){
+    .container {
+	    width: 324px;
+    }
+    .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+    	margin-left: 12px;
+    }
+    .grid1 {
+    	width: 30px;
+    }
+    .grid2 {
+    	width: 72px;
+    }
+    .grid3 {
+        width: 114px;
+    }
+    .grid4 {
+    	width: 156px;
+    }
+    .grid5 {
+    	width: 156px;
+    }
+    .grid6 {
+    	width: 156px;
+    }
+    .grid7 {
+    	width: 156px;
+    }
+    .grid8 {
+    	width: 156px;
+    }
+    .grid9 {
+    	width: 198px;
+    }
+    .grid10 {
+    	width: 240px;
+    }
+    .grid11 {
+    	width: 282px;
+    }
+}
+
+@media screen and (max-width:323px) and (min-width:100px){
+    .container {
+    	width: 240px;
+    }
+    .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+    	margin-left: 8px;
+    }
+    .grid1 {
+    	width: 23px;
+    }
+    .grid2 {
+    	width: 54px;
+    }
+    .grid3 {
+        width: 85px;
+    }
+    .grid4 {
+    	width: 116px;
+    }
+    .grid5 {
+    	width: 116px;
+    }
+    .grid6 {
+    	width: 116px;
+    }
+    .grid7 {
+    	width: 116px;
+    }
+    .grid8 {
+    	width: 116px;
+    }
+    .grid9 {
+    	width: 147px;
+    }
+    .grid10 {
+    	width: 178px;
+    }
+    .grid11 {
+    	width: 209px;
+    }
+}
+
+.first {
+   	margin-left: 0;
+   	clear: left;
+}

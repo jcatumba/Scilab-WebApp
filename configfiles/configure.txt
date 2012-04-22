@@ -1,0 +1,5 @@
+//
+
+Instalar: apache, mod_perl, postgresql, postgresql-contrib
+
+Los archivos de la app deben ir en el directorio /var/www/html/
