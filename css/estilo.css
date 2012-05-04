@@ -21,7 +21,7 @@ a  { text-decoration: none; color: #000; border-bottom: 1px dotted #900; outline
 h1 { font: bold 30px Helvetica, Sans-Serif; margin: 0 0 8px 0; }
 h2 { margin: 0 0 10px 0; }
 p { margin: 0 0 6px 0; }
-.button { background: url() repeat-x; -moz-border-radius: 5px; padding: 6px 12px; border: none; color: #000; cursor: pointer; text-shadow: 0 1px 1px #666; -webkit-border-radius: 5px; -webkit-box-shadow: 0 1px 3px #999; -moz-box-shadow: 0 1px 3px #999; font: bold 16px Helvetica; }
+.button { background-color: #292; -moz-border-radius: 5px; padding: 6px 12px; border: none; color: #fff; cursor: pointer; text-shadow: 0 1px 1px #666; -webkit-border-radius: 5px; -webkit-box-shadow: 0 1px 3px #999; -moz-box-shadow: 0 1px 3px #999; font: bold 16px Helvetica; }
 .button:hover { background-position: bottom left; }
 .red { background: red; color: white; font-size: 12px; padding: 3px; }
 
@@ -29,7 +29,7 @@ p { margin: 0 0 6px 0; }
     HEADER
 */
 #header { height: 68px; position: relative; }
-#header h1 { position: relative; top: 0; left: 0; z-index: 2; overflow:hidden;}
+#header h1 { position: relative; top: 10px; left: 0; z-index: 2; overflow:hidden;}
 #header h1 a { display: block; width: 350px; height: 38px; border: none;}
 #control { width: 500px; float: right; padding: 10px 237px 0 0; text-align: right; }
 
@@ -61,6 +61,8 @@ p { margin: 0 0 6px 0; }
 */
 label { background: #999; color: white; padding: 3px; }
 input[type="text"], input[type="password"] { width: 324px; border: 3px solid #999; font-size: 18px; padding: 7px; display: block; }
+input[type="text"]:focus, input[type="password"]:focus { width: 324px; border: 3px solid #922; font-size: 18px; padding: 7px; display: block; }
+input[type="text"]:focus + label, input[type="password"]:focus +label  { background: #922; color: white; padding: 3px; }
 #add-new input[type="text"] { width: 532px; float: left; margin: 0 10px 0 69px; }
 #add-new input[type="text"]:focus { border-color: #73B8BF; }
 #add-new input[type="submit"] { padding: 10px 12px; }

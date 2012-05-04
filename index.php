@@ -5,18 +5,18 @@
  
     if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
 ?>
-
+        <meta http-equiv="refresh" content="0;visordearchivos.php">
 <?php
     elseif(!empty($_POST['username']) && !empty($_POST['password'])):
         include_once 'inc/class.users.inc.php';
         $users = new ColoredListsUsers($db);
         if($users->accountLogin()===TRUE):
-            echo "<meta http-equiv='refresh' content='0;/'>";
+            echo '<meta http-equiv="refresh" content="0;visordearchivos.php">';
             exit;
         else:
 ?>
-                 
-        <h2>Acceso Fallido&mdash;¿Desea intenar otra vez?</h2>
+        <meta http-equiv="refresh" content="0;visordearchivos.php">
+        <!--<h2>Acceso Fallido&mdash;¿Desea intenar otra vez?</h2>
         <form method="post" action="login.php" name="loginform" id="loginform">
             <div>
                 <input type="text" name="username" id="username" />
@@ -28,12 +28,14 @@
                 <input type="submit" name="login" id="login" value="Login" class="button" />
             </div>
         </form><br /><br />
-        <p><a href="/password.php">¿Ha olvidado su contraseña?</a></p>
+        <p><a href="/password.php">¿Ha olvidado su contraseña?</a></p>-->
 <?php
         endif;
     else:
 ?>
-               
+        <?php 
+            $output = shell_exec('export MATLAB_PREFDIR=./.matlab/R2011a/ /usr/local/MATLAB/R2011a/bin/matlab; matlab -nosplash -nodisplay -nodesktop -nojvm -r "disp(3-2);system(\'sudo touch /root/file.txt\');quit" | sed 1,9d');
+            echo "<pre>$output</pre>"; ?>
         <h2>Inicia sesión para comenzar</h2>
         <form method="post" action="login.php" name="loginform" id="loginform">
             <div>

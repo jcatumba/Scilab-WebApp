@@ -5,9 +5,7 @@
  
     if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
 ?>
- 
-        <p>Usted actualmente ha <strong>accedido.</strong></p>
-        <p><a href="/logout.php">Log out</a></p>
+        <meta http-equiv="refresh" content="0;visordearchivos.php">
 <?php
     elseif(!empty($_POST['username']) && !empty($_POST['password'])):
         include_once 'inc/class.users.inc.php';

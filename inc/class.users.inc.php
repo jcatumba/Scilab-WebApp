@@ -43,7 +43,7 @@ class ColoredListsUsers
         $sql = "SELECT usuario
                 FROM usuarios
                 WHERE usuario=:user
-                AND password=:pass
+                AND password=MD5(:pass)
                 LIMIT 1";
         try
         {
@@ -70,14 +70,15 @@ class ColoredListsUsers
 
     public function createAccount()
     {
-        $u = trim($_POST['email']);
-        $key = trim($_POST['acceskey']);
-        $log = trim($_POST['user']);
-        $v = trim($_POST['password']);
+        $email = trim($_POST['email']);
+        $key = trim($_POST['accesskey']);
+        $user = trim($_POST['user']);
+        $pass = trim($_POST['password']);
+        $dir = trim("usersfiles/".$user);
 
-        $sql = "SELECT COUNT(email) AS theCount FROM usuarios WHERE email=:email";
+        $sql = "SELECT COUNT(emails) AS theCount FROM usuarios WHERE email=:email";
         if($stmt = $this->_db->prepare($sql)) {
-            $stmt->bindParam(":email", $_POST['email'], PDO::PARAM_STR);
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch();
             if($row['theCount']!=0) {
@@ -85,27 +86,15 @@ class ColoredListsUsers
                     . "<p> Lo sentimos, ese correo ya está en uso. "
                     . "Por favor intente de nuevo. </p>";
             }
-//            if(!$this->sendVerificationEmail($u, $v)) {
-//                return "<h2> Error </h2>"
-//                    . "<p> Hubo un error enviando su"
-//                    . " email de verficación. Por favor "
-//                    . "<a href="mailto:cdacostam@unal.edu.co<script type="text/javascript">
-///* <![CDATA[ */
-//(function(){try{var s,a,i,j,r,c,l=document.getElementById("__cf_email__");a=l.className;if(a){s='';r=parseInt(a.substr(0,2),16);for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
-///* ]]> */
-//</script>">contáctenos "
-//                    . "para solucionar el problema. Nos disculpamos por "
-//                    . "la inconveniencia. </p>";
-//            }
             $stmt->closeCursor();
         }
 
-        $sql = "SELECT COUNT(keyaccess) as theCount FROM accesskeys WHERE keyaccess=:akey";
+        $sql = "SELECT COUNT(keyaccess) AS counter FROM usuarios WHERE keyaccess=:akey";
         if($stmt = $this->_db->prepare($sql)) {
-            $stmt->bindParam(":akey", $_POST['accesskey'], PDO::PARAM_INT);
+            $stmt->bindParam(":akey", $key, PDO::PARAM_INT);
             $stmt->execute();
             $row = $stmt->fetch();
-            if($row['theCount']!=0) {
+            if($row['counter']!=0) {
                 return "<h2> Error </h2>"
                     . "<p> Lo sentimos, la clave insertada no es válida o ya ha sido usada. "
                     . "Por favor intente de nuevo.</p>";
@@ -113,31 +102,35 @@ class ColoredListsUsers
             $stmt->closeCursor();
         }
          
-        $sql = "INSERT INTO usuarios (usuario,email,keyaccess,password) VALUES(:user,:email,:ver,:pass)";
+        $sql = "INSERT INTO usuarios (usuario,email,keyaccess,password,homedir) VALUES(:user,:email,:ver,MD5(:pass),:homedir)";
         if($stmt = $this->_db->prepare($sql)) {
-            $stmt->bindParam(":email", $_POST['email'], PDO::PARAM_STR);
-            $stmt->bindParam(":ver", $_POST['accesskey'], PDO::PARAM_INT);
-            $stmt->bindParam(":user", $_POST['user'], PDO::PARAM_STR);
-            $stmt->bindParam(":pass", $_POST['password'], PDO::PARAM_STR);
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+            $stmt->bindParam(":ver", $key, PDO::PARAM_INT);
+            $stmt->bindParam(":user", $user, PDO::PARAM_STR);
+            $stmt->bindParam(":pass", $pass, PDO::PARAM_STR);
+            $stmt->bindParam(":homedir", $dir, PDO::PARAM_STR);
             $stmt->execute();
             $stmt->closeCursor();
- 
-            $url = "/".$_POST['user'];
- 
+            
+            return "<h2> ¡Hecho! </h2>"
+                    . "<p> Su cuenta ha sido "
+                    . "creada con el nombre de usuario <strong>$user</strong>.";
             /*
              * If the UserID was successfully
-             * retrieved, create a default list.
+             * retrieved, create a default directory.
              */
-            $sql = "INSERT INTO files (usuario,homedir) VALUES ($log, $url)";
-            if(!$this->_db->query($sql)) {
+            /*$sqlm = "INSERT INTO files (usuario,homedir) VALUES ($user,$dir)";
+            if($Stmt = $this->_db->prepare($sqlm)) {
+                $stmt->bindParam(":user", $user, PDO::PARAM_STR);
+                $stmt->bindParam(":dir", $dir, PDO::PARAM_STR);
+                $Stmt->execute();
+                $Stmt->closeCursor();
+                
+            } else {
                 return "<h2> Error </h2>"
                     . "<p> Su cuenta fue creada, pero "
                     . "la creación de su directorio falló. </p>";
-            } else {
-                return "<h2> ¡Hecho! </h2>"
-                    . "<p> Su cuenta ha sido "
-                    . "creada con el nombre de usuario <strong>$u</strong>.";
-            }
+            }*/
         } else {
             return "<h2> Error </h2><p> No se ha podido insertar la "
                 . "información de usuario en la base de datos. </p>";

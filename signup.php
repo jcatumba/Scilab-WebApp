@@ -1,16 +1,14 @@
 <?php
     include_once "common/base.php";
-    $pageTitle = "Register";
+    $pageTitle = "Registro";
     include_once "common/header.php";
  
-    if(!empty($_POST['username'])):
+    if(!empty($_POST['user'])):
         include_once "inc/class.users.inc.php";
         $users = new ColoredListsUsers($db);
         echo $users->createAccount();
-        header ("Location: /visordearchivos.php");
     else:
 ?>
- 
         <h2>Regístrate si aún no tienes cuenta</h2>
         <form method="post" action="signup.php" id="registerform">
             <div>
