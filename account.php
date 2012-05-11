@@ -3,8 +3,6 @@
     if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1):
         $pageTitle = "Cuenta";
         include_once "common/header.php";
-        include_once 'inc/class.users.inc.php';
-        $users = new ColoredListsUsers($db);
  
         if(isset($_GET['email']) && $_GET['email']=="changed")
         {
@@ -19,72 +17,82 @@
  
         if(isset($_GET['password']) && $_GET['password']=="changed")
         {
-            echo "<div class='message good'>Your password "
-                . "has been changed.</div>";
+            echo "<div class='message good'>Su contraseña "
+                . "ha sido cambiada.</div>";
         }
         elseif(isset($_GET['password']) && $_GET['password']=="nomatch")
         {
-            echo "<div class='message bad'>The two passwords "
-                . "did not match. Try again!</div>";
+            echo "<div class='message bad'>Las dos contraseñas "
+                . "son distintas. ¡Intente de nuevo!</div>";
         }
  
         if(isset($_GET['delete']) && $_GET['delete']=="failed")
         {
-            echo "<div class='message bad'>There was an error "
-                . "deleting your account.</div>";
+            echo "<div class='message bad'>Hubo un error "
+                . "al intentar borrar su cuenta.</div>";
         }
- 
-        list($userID, $v) = $users->retrieveAccountInfo();
+        if(isset($_GET['codigo']) && $_GET['codigo']=="generado") 
+        {
+            $code = $_GET['key'];
+            echo "<div class='message good'>El código de acceso generado es ".$code."</div>";
+        }
 ?>
  
-        <h2>Your Account</h2>
-        <form method="post" action="db-interaction/users.php">
-            <div>
-                <input type="hidden" name="userid"
-                    value="<?php echo $userID ?>" />
-                <input type="hidden" name="action"
-                    value="changeemail" />
-                <input type="text" name="username" id="username" />
-                <label for="username">Change Email Address</label>
-                <br /><br />
-                <input type="submit" name="change-email-submit"
-                    id="change-email-submit" value="Change Email"
-                    class="button" />
-            </div>
-        </form><br /><br />
- 
+        <h2>Su cuenta</h2>
+        Nombre de usuario: <?php echo $usuario ?><br />
+        Directorio de trabajo: <?php echo $homedir?>
+        <hr />
+        
+        <h2>Cambiar Contraseña</h2>
         <form method="post" action="db-interaction/users.php"
             id="change-password-form">
             <div>
-                <input type="hidden" name="user-id"
-                    value="<?php echo $userID ?>" />
-                <input type="hidden" name="v"
-                    value="<?php echo $v ?>" />
                 <input type="hidden" name="action"
                     value="changepassword" />
+                <input type="hidden" name="user"
+                    value="<?php echo $usuario ?>"/>
                 <input type="password"
-                    name="p" id="new-password" />
-                <label for="password">New Password</label>
+                    name="pass" id="new-password" />
+                <label for="password">Nueva Contraseña</label>
                 <br /><br />
                 <input type="password" name="r"
                     id="repeat-new-password" />
-                <label for="password">Repeat New Password</label>
+                <label for="password">Repetir Contraseña</label>
                 <br /><br />
                 <input type="submit" name="change-password-submit"
-                    id="change-password-submit" value="Change Password"
+                    id="change-password-submit" value="Cambiar Contraseña"
                     class="button" />
             </div>
         </form>
         <hr />
+        
+        <?php 
+            if($grupo == "admin"):
+            print ""; ?>
+        <h2>Crear código de acceso</h2>
+        <form method="post" action="db-interaction/users.php" id="getcode">
+        <div>
+            <input type="hidden" name="action" value="genkey" />
+            <input type="submit" name="getcode-submit" value="Generar" class="button"/>
+        </div>
+        </form>
+        <hr />
+        <?php endif; ?>
+            
  
-        <form method="post" action="deleteaccount.php"
+        <form method="post" action="db-interaction/deleteaccount.php"
             id="delete-account-form">
             <div>
                 <input type="hidden" name="user-id"
-                    value="<?php echo $userID ?>" />
+                    value="<?php echo $usuario ?>" />
+                <input type="hidden" name="user-dir"
+                    value="<?php echo $homedir?>" />
                 <input type="submit"
                     name="delete-account-submit" id="delete-account-submit"
-                    value="Delete Account?" class="button" />
+                    value="¿Borrar cuenta?" class="button" />
+                <br /><br />
+                <p class="message bad">Todos sus archivos serán borrados. 
+                Se recomienda que los guarde en un lugar seguro.</p>
             </div>
         </form>
  
@@ -98,6 +106,5 @@
 <div class="clear"></div>
  
 <?php
-    include_once "common/ads.php";
-    include_once "common/close.php";
+    include_once "common/footer.php";
 ?>

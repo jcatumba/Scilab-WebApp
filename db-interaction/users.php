@@ -4,7 +4,7 @@ session_start();
  
 include_once "../inc/constants.inc.php";
 include_once "../inc/class.users.inc.php";
-$userObj = new ColoredListsUsers();
+$users = new ColoredListsUsers();
  
 if(!empty($_POST['action'])
 && isset($_SESSION['LoggedIn'])
@@ -13,15 +13,23 @@ if(!empty($_POST['action'])
     switch($_POST['action'])
     {
         case 'changeemail':
-            $status = $userObj->updateEmail() ? "changed" : "failed";
+            $status = $users->updateEmail() ? "changed" : "failed";
             header("Location: /account.php?email=$status");
             break;
         case 'changepassword':
-            $status = $userObj->updatePassword() ? "changed" : "nomatch";
+            $status = $users->updatePassword() ? "changed" : "nomatch";
             header("Location: /account.php?password=$status");
             break;
         case 'deleteaccount':
             $userObj->deleteAccount();
+            break;
+        case 'genkey':
+            if($code = $users->generatecodes()){
+                $status = "generado";
+            } else {
+                $status = "error";
+            }
+            header("Location: /account.php?codigo=$status&key=$code");
             break;
         default:
             header("Location: /");
@@ -30,9 +38,9 @@ if(!empty($_POST['action'])
 }
 elseif($_POST['action']=="resetpassword")
 {
-    if($resp=$userObj->resetPassword()===TRUE)
+    if($resp=$users->resetPassword()===TRUE)
     {
-        header("Location: /resetpending.php");
+        header("Location: /");
     }
     else
     {

@@ -1,7 +1,7 @@
 <?php
     include_once "common/base.php";
  
-    if(isset($_GET['v']) && isset($_GET['e']))
+    if(isset($_GET['v']) && isset($_GET['em']))
     {
         include_once "inc/class.users.inc.php";
         $users = new ColoredListsUsers($db);
@@ -17,11 +17,11 @@
     }
     else
     {
-        header("Location: /login.php");
+        /*header("Location: /login.php");*/
         exit;
     }
  
-    $pageTitle = "Reset Your Password";
+    $pageTitle = "Reiniciar contraseña";
     include_once "common/header.php";
  
     if(isset($ret[0])):
@@ -30,16 +30,19 @@
         if($ret[0]<3):
 ?>
  
-        <h2>Reset Your Password</h2>
+        <h2>Reiniciar contraseña</h2>
  
         <form method="post" action="accountverify.php">
             <div>
-                <label for="p">Choose a New Password:</label>
-                <input type="password" name="p" id="p" /><br />                
-                <label for="r">Re-Type Password:</label>
-                <input type="password" name="r" id="r" /><br />
+                <input type="hidden" name="user" value="<?php echo $usuario?>"/>
+                <input type="password" name="pass" id="p" />
+                <label for="p">Escoja una contraseña</label>
+                <br /><br />
+                <input type="password" name="r" id="r" />
+                <label for="r">Repita la contraseña</label>
+                <br /><br />
                 <input type="hidden" name="v" value="<?php echo $_GET['v'] ?>" />
-                <input type="submit" name="verify" id="verify" value="Reset Your Password" />
+                <input type="submit" name="verify" id="verify" class="button" value="Reiniciar contraseña" />
             </div>
         </form>
  
@@ -49,6 +52,5 @@
         echo '<meta http-equiv="refresh" content="0;/">';
     endif;
  
-    include_once("common/ads.php");
-    include_once 'common/close.php';
+    include_once("common/footer.php");
 ?>

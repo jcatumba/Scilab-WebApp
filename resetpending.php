@@ -4,9 +4,8 @@
     include_once "common/header.php";
 ?>
              
-        <h2>Password Reset Requested</h2>
-        <p>Check your email to finish the reset process.</p>
+        <h2>Reinicio de contraseña enviado</h2>
+        <p>Verifique su correo electrónico para terminar el proceso.</p>
 <?php
-    include_once "common/ads.php";
-    include_once "common/close.php";
+    include_once "common/footer.php";
 ?>

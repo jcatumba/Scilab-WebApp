@@ -33,8 +33,11 @@
                 <?php
                     if(isset($_SESSION['LoggedIn']) && isset($_SESSION['Username'])
                     && $_SESSION['LoggedIn']==1):
+                    include_once 'inc/class.users.inc.php';
+                    $users = new ColoredListsUsers($db);
+                    list($usuario, $homedir, $grupo) = $users->retrieveAccountInfo();
                 ?>
-                    <p><a href="/logout.php" class="button">Log out</a> <a href="/account.php" class="button">Your Account</a></p>
+                    <p><a href="/account.php"><?php echo $usuario ?> </a><a href="/logout.php">| salir</a></p>
                 <?php else: ?>
                     <!--<p><a class="button" href="/signup.php">Sign up</a> &nbsp; <a class="button" href="/login.php">Log in</a></p>-->
                 <?php endif; ?>
