@@ -89,12 +89,25 @@
                     value="<?php echo $homedir?>" />
                 <input type="submit"
                     name="delete-account-submit" id="delete-account-submit"
-                    value="¿Borrar cuenta?" class="button" />
+                    value="¿Borrar cuenta?" class="button"/>
                 <br /><br />
                 <p class="message bad">Todos sus archivos serán borrados. 
                 Se recomienda que los guarde en un lugar seguro.</p>
             </div>
         </form>
+        
+        <script>
+            $("#delete-account-submit").click(function(event) {
+                if(!confirm('¿Está seguro de eliminar su cuenta?')) {
+                    event.preventDefault();
+                }
+            });
+            $("#change-password-submit").click(function(event) {
+                if(!confirm('¿Está seguro de cambiar su contraseña?')) {
+                    event.preventDefault();
+                }
+            });
+        </script>
  
 <?php
     else:

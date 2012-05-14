@@ -6,29 +6,38 @@
     if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
 ?>
 
-<div id="application" class="container">
-<div id="toolbar"> </div>
+<div id="application" class="">
+<div id="editor_toolbar" class="toolbar">
+    <ul class="actions">
+    <li><a href="javascript:saveFile('<?php echo $homedir?>')">Guardar</a></li>
+    <li><a href="#">Ejecutar</a></li>
+    </ul>
+    </div>
 <div id="editor" class="nothing">
-%definicion del matlab
-function a+b; A=[1 0;3 2] %comentario
-"cadena", 'hola' %another comment
-if, for, end, while, break, else, elseif, true, false
 </div>
-<script src="src/ace.js" type="text/javascript" charset="utf-8">
-</script>
-<script src="src/theme-clouds_midnight.js" type="text/javascript" charset="utf-8">
-</script>
-<script src="src/mode-matlab.js" type="text/javascript" charset="utf-8">
-</script>
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/theme-clouds.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/mode-matlab.js" type="text/javascript" charset="utf-8"></script>
 <script>
 window.onload = function(){
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/clouds_midnight");
+    editor.setTheme("ace/theme/clouds");
+    $("#editor").css('font-size','14px');
     var MatlabScriptMode = require("ace/mode/matlab").Mode;
     editor.getSession().setMode(new MatlabScriptMode());
+    $.get(<?php echo $_GET['file']?>, function(data){
+        /*$('#editor').html(data);*/
+        editor.getSession().setValue(data);
+    });
 };
-</script></div>
 
+function saveFile(directorio){
+    var editor = ace.edit("editor");
+    alert(editor.getSession().getValue());
+}
+</script>
+</div>
+<script type="text/javascript" src="js/editoractions.js"></script>
 <?php
     else:
 ?>

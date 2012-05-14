@@ -25,7 +25,7 @@
             echo "<pre>$output</pre>";*/
             ?>
         <h2>Inicia sesión para comenzar</h2>
-        <form method="post" action="login.php" name="loginform" id="loginform">
+        <form method="post" action="login.php" name="loginform" id="loginform" class="nofiles">
             <div>
                 <input type="text" name="username" id="username" />
                 <label for="username">Usuario</label>
@@ -51,7 +51,7 @@
     else:
 ?>
         <h2>Regístrate si aún no tienes cuenta</h2>
-        <form method="post" action="signup.php" id="registerform">
+        <form method="post" action="signup.php" id="registerform" class="nofiles">
             <div>
                 <input type="email" name="email" id="email" />
                 <label for="email">Email</label>

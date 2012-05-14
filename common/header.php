@@ -37,7 +37,7 @@
                     $users = new ColoredListsUsers($db);
                     list($usuario, $homedir, $grupo) = $users->retrieveAccountInfo();
                 ?>
-                    <p><a href="/account.php"><?php echo $usuario ?> </a><a href="/logout.php">| salir</a></p>
+                    <p><a href="/account.php"><?php echo $usuario ?></a> | <a href="/logout.php">salir</a></p>
                 <?php else: ?>
                     <!--<p><a class="button" href="/signup.php">Sign up</a> &nbsp; <a class="button" href="/login.php">Log in</a></p>-->
                 <?php endif; ?>
