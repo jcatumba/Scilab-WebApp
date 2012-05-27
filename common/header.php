@@ -19,7 +19,18 @@
 
     <!--JavaScript-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script type="text/javascript" src="js/jquery"><\/script>')</script>
+    <script>window.jQuery || document.write('<script type="text/javascript" src="js/jquery.js"><\/script>')</script>
+    <script>
+    $(document).ready(function()
+    {
+        var t=setTimeout("fade()",3000);
+        // The DOM (document object model) is constructed
+        // We will initialize and run our plugin here
+    });
+    function fade(){
+        $(".message").fadeOut(300);
+    }
+    </script>
 </head>
 
 <body>

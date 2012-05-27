@@ -11,19 +11,15 @@
         include_once 'inc/class.users.inc.php';
         $users = new ColoredListsUsers($db);
         if($users->accountLogin()===TRUE):
-            echo '<meta http-equiv="refresh" content="0;visordearchivos.php">';
+            echo '<meta http-equiv="refresh" content="visordearchivos.php">';
             exit;
         else:
 ?>
-        <meta http-equiv="refresh" content="0;visordearchivos.php">
+        <meta http-equiv="refresh" content="visordearchivos.php">
 <?php
         endif;
     else:
 ?>
-        <?php 
-            /*$output = shell_exec('export MATLAB_PREFDIR=./.matlab/R2011a/ /usr/local/MATLAB/R2011a/bin/matlab; matlab -nosplash -nodisplay -nodesktop -nojvm -r "disp(3-2);quit" | sed 1,9d');
-            echo "<pre>$output</pre>";*/
-            ?>
         <h2>Inicia sesión para comenzar</h2>
         <form method="post" action="login.php" name="loginform" id="loginform" class="nofiles">
             <div>

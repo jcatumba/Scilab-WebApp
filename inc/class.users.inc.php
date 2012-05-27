@@ -29,6 +29,13 @@ function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE)
     	return $rstr;
     }
 
+function esperarentrada(){
+    if(!empty($_POST['command'])){
+        return $_POST['command'];
+    }
+    return "";
+}
+
 class ColoredListsUsers
 {
     /**
