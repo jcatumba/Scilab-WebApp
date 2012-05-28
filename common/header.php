@@ -46,7 +46,7 @@
                     && $_SESSION['LoggedIn']==1):
                     include_once 'inc/class.users.inc.php';
                     $users = new ColoredListsUsers($db);
-                    list($usuario, $homedir, $grupo) = $users->retrieveAccountInfo();
+                    list($usuario, $homedir, $grupo, $shmid) = $users->retrieveAccountInfo();
                 ?>
                     <p><a href="/account.php"><?php echo $usuario ?></a> | <a href="/logout.php">salir</a></p>
                 <?php else: ?>

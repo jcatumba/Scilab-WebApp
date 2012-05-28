@@ -29,11 +29,12 @@ function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE)
     	return $rstr;
     }
 
-function esperarentrada(){
-    if(!empty($_POST['command'])){
-        return $_POST['command'];
-    }
-    return "";
+function esperarentrada(&$comando, &$shm_id){
+    $shm_size = shmop_size($shm_id);
+    $shm_data = shmop_read($shm_id, 0, $shm_size);
+    if($comando !== $shm_data){
+        return $shm_data;
+    } return "";
 }
 
 class ColoredListsUsers
@@ -140,14 +141,31 @@ class ColoredListsUsers
                 }
                 $stmt->closeCursor();
             }
-             
-            $sql = "INSERT INTO usuarios (usuario,email,keyaccess,password,homedir,grupo) VALUES(:user,:email,:ver,MD5(:pass),:homedir,'usuario')";
+            
+            $accept = 1;
+            $shmkey = "";
+            $sql = "SELECT COUNT(shmid) AS contador FROM usuarios WHERE shmid=:shmkey";
+            while ($accept==1) {
+                $shmkey = RandomString(6,FALSE);
+                if($stmt = $this->_db->prepare($sql)) {
+                    $stmt->bindParam(":akey", $shmkey, PDO::PARAM_STR);
+                    $stmt->execute();
+                    $row = $stmt->fetch();
+                    if($row['contador']==0) {
+                        $accept = 0;
+                    }
+                    $stmt->closeCursor();
+                }
+            }
+            
+            $sql = "INSERT INTO usuarios (usuario,email,keyaccess,password,homedir,grupo,shmid) VALUES(:user,:email,:ver,MD5(:pass),:homedir,'usuario',:shm)";
             if($stmt = $this->_db->prepare($sql)) {
                 $stmt->bindParam(":email", $email, PDO::PARAM_STR);
                 $stmt->bindParam(":ver", $key, PDO::PARAM_INT);
                 $stmt->bindParam(":user", $user, PDO::PARAM_STR);
                 $stmt->bindParam(":pass", $pass, PDO::PARAM_STR);
                 $stmt->bindParam(":homedir", $dir, PDO::PARAM_STR);
+                $stmt->bindParam(":shm", $shmkey, PDO::PARAM_STR);
                 $stmt->execute();
                 $stmt->closeCursor();
                 shell_exec('mkdir '.$dir);
@@ -168,7 +186,7 @@ class ColoredListsUsers
     
     public function retrieveAccountInfo()
     {
-        $sql = "SELECT usuario, homedir, grupo
+        $sql = "SELECT usuario, homedir, grupo, shmid
                 FROM usuarios
                 WHERE usuario=:user";
         try
@@ -178,7 +196,7 @@ class ColoredListsUsers
             $stmt->execute();
             $row = $stmt->fetch();
             $stmt->closeCursor();
-            return array($row['usuario'], $row['homedir'], $row['grupo']);
+            return array($row['usuario'], $row['homedir'], $row['grupo'], $row['shmid']);
         }
         catch(PDOException $e)
         {
@@ -188,9 +206,23 @@ class ColoredListsUsers
     
     public function generatecodes()
     {
-        $genkey = RandomString();
-        $sql = "INSERT INTO accesskeys (keyaccess) VALUES(:genkey)";
+        $accept = 1;
+        $genkey = "";
+        $sql = "SELECT COUNT(keyaccess) AS counter FROM accesskeys WHERE keyaccess=:akey";
+        while ($accept==1) {
+            $genkey = RandomString();
+            if($stmt = $this->_db->prepare($sql)) {
+                $stmt->bindParam(":akey", $genkey, PDO::PARAM_STR);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                if($row['counter']==0) {
+                    $accept = 0;
+                }
+                $stmt->closeCursor();
+            }
+        }
         
+        $sql = "INSERT INTO accesskeys (keyaccess) VALUES(:genkey)";
         try
         {
             $stmt = $this->_db->prepare($sql);

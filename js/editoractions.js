@@ -15,27 +15,27 @@ function saveFile(archivo){
     });
 }
 
-function startProcess(){
+function startProcess(shmid){
     var request = $.ajax({
         url: "db-interaction/interactive.php",
         type: "POST",
-        data: {action: "start"},
+        data: {action: 'start', shm : shmid},
         dataType: "html"
     });
     
-    request.done(function() {
-        alert("Se ha abierto el proceso.");
+    request.done(function(data) {
+        return data;
     });
     request.fail(function(jqXHR, textStatus) {
         alert("Solicitud fallida (iniciar proceso): "+textStatus)
     });
 }
 
-function evaluateText(comando){
+function evaluateText(comando,shmid){
     var request = $.ajax({
-        url: "db-interaction/interactive.php",
+        url: "db-interaction/interface.php",
         type: "POST",
-        data: {command : comando, action : ""},
+        data: {command : comando, idshm : shmid},
         dataType: "html"
     });
     

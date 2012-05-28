@@ -61,7 +61,7 @@
                     if ( event.which == 13 ) {
                         event.preventDefault();
                         texto = $(".consolebox").val();
-                        evaluateText(texto);
+                        evaluateText(texto,idshm);
                     }
                 });
             </script>
@@ -72,7 +72,7 @@
 <script type="text/javascript" src="js/editoractions.js"></script>
 <script>
 $(document).ready(function(){
-    startProcess();
+    idshm = startProcess(<?php echo $shmid?>);
 });
 </script>
 

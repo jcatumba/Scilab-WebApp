@@ -12,6 +12,8 @@
     if ($_POST['action'] == "start" ) {
         $stream = expect_popen('ftp ftp.kernel.org');
         /*$stream = expect_popen('export MATLAB_PREFDIR=./.matlab/R2011a/ /usr/local/MATLAB/R2011a/bin/matlab; matlab -nosplash -nodisplay -nodesktop -nojvm');*/
+        $shm_id = shmop_open($_POST['shm'], "n", 0644, 10000);
+        echo $shm_id;
         while (true) {
             switch (expect_expectl ($stream, $casos)) {
                 case "name":
@@ -22,7 +24,8 @@
                     break;
                 case "FTP":
                     while ($comando !== "quit") {
-                        $comando = esperarentrada();
+                        sleep(30);
+                        $comando = esperarentrada($comando,$shm_id);
                         fwrite($stream, $comando."\n");
                         echo fgets($stream);
                     }
