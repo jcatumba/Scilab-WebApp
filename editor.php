@@ -19,13 +19,13 @@
             <div id="editor_toolbar" class="toolbar">
                 <ul class="actions">
                     <li><a href="javascript:saveFile('<?php echo $homedir . '/' . $_GET['file']?>')">Guardar</a></li>
-                    <li><a href="#">Ejecutar Todo</a></li>
-                    <li><a href="#">Ejecutar Selección</a></li>
+                    <li><a href="javascript:execute('all')">Ejecutar Todo</a></li>
+                    <li><a href="javascript:execute('sel')">Ejecutar Selección</a></li>
                 </ul>
             </div><!--editor_toolbar-->
             <div id="editor" class="nothing"></div><!--editor-->
             <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
-            <script src="src/theme-clouds.js" type="text/javascript" charset="utf-8"></script>
+            <script src="src/theme-textmate.js" type="text/javascript" charset="utf-8"></script>
             <script src="src/mode-matlab.js" type="text/javascript" charset="utf-8"></script>
             <script>
                 window.onload = function(){
@@ -33,7 +33,7 @@
                     var Document = require('ace/document').Document;
                     $("#editor").css('font-size','14px');
                     editor = ace.edit("editor");
-                    editor.setTheme("ace/theme/clouds");
+                    editor.setTheme("ace/theme/textmate");
                     var MatlabScriptMode = require("ace/mode/matlab").Mode;
                 <?php
                     if(!empty($_GET['file'])){
@@ -53,18 +53,8 @@
         </div><!--content-1-->
         <div id="content-2">
             <div id="consola">
-                <textarea rows="1" class="consolebox"></textarea>
                 <pre id="consoleoutput"></pre>
             </div>
-            <script>
-                $(".consolebox").keypress(function(event){
-                    if ( event.which == 13 ) {
-                        event.preventDefault();
-                        texto = $(".consolebox").val();
-                        evaluateText(texto,idshm);
-                    }
-                });
-            </script>
         </div><!--content-2-->
     </div><!--content-->
 </div><!--application-->
@@ -72,7 +62,7 @@
 <script type="text/javascript" src="js/editoractions.js"></script>
 <script>
 $(document).ready(function(){
-    idshm = startProcess(<?php echo $shmid?>);
+    //idshm = startProcess('<?php echo $shmid?>');
 });
 </script>
 

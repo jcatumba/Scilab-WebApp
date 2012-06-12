@@ -15,34 +15,18 @@ function saveFile(archivo){
     });
 }
 
-function startProcess(shmid){
-    var request = $.ajax({
-        url: "db-interaction/interactive.php",
-        type: "POST",
-        data: {action: 'start', shm : shmid},
-        dataType: "html"
-    });
-    
-    request.done(function(data) {
-        return data;
-    });
-    request.fail(function(jqXHR, textStatus) {
-        alert("Solicitud fallida (iniciar proceso): "+textStatus)
-    });
-}
-
-function evaluateText(comando,shmid){
-    var request = $.ajax({
-        url: "db-interaction/interface.php",
-        type: "POST",
-        data: {command : comando, idshm : shmid},
-        dataType: "html"
-    });
-    
-    request.done(function(data) {
-        $('#consoleoutput').append(data);
-    });
-    request.fail(function(jqXHR, textStatus) {
-        alert("Se ha producido un error (ejecutar): "+textStatus)
-    });
+function execute(option){
+    if (option=="all") {
+        codigo = editor.session.getValue();
+        var sendcomand = $.ajax({
+            url: "http://localhost:8000/simple/compute",
+            type: "GET",
+            data: {session:%s, code:2*2, timeout: 60},
+            dataType: "json"
+        });
+        $("#consoleoutput").append(codigo);
+    } else if (option=="sel") {
+        codigo = editor.session.getTextRange(editor.getSelectionRange());
+        $("#consoleoutput").append(codigo);
+    }
 }

@@ -173,7 +173,25 @@ class ColoredListsUsers
                 return "<h2> ¡Hecho! </h2>"
                         . "<p> Su cuenta ha sido "
                         . "creada con el nombre de usuario <strong>$user</strong>."
-                        . "<p> Para iniciar sesión de click <a href='index.php'>aquí</a></p>";
+                        . "<p> Para iniciar sesión de click <a href='index.php' onClick='register_user()'>aquí</a></p>"
+                        . "<script>\n"
+                        ." function register_user(){\n"
+                        ."    var request = $.ajax({\n"
+                        ."        url: \"http://localhost:8000/register\",\n"
+                        ."        crossDomain: true,\n"
+                        ."        type: \"POST\",\n"
+                        ."        data: {username : ".$user.", password : ".$pass.", retype_password : ".$user."},\n"
+                        ."        dataType: \"json\"\n"
+                        ."    });\n"
+                        ."    alert(request.getAllResponseHeaders());\n"
+                        ."    request.done(function() {\n"
+                        ."        alert(\"Se ha creado la cuenta\");\n"
+                        ."    });\n"
+                        ."    request.fail(function(jqXHR, textStatus) {\n"
+                        ."        alert(\"Solicitud fallida (crear cuenta): \"+textStatus)\n"
+                        ."    });\n"
+                        ."}\n"
+                        . "</script>\n";
             } else {
                 return "<h2> Error </h2><p> No se ha podido insertar la "
                     . "información de usuario en la base de datos. </p>";

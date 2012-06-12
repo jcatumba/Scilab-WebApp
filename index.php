@@ -29,7 +29,7 @@
                 <input type="password" name="password" id="password" />
                 <label for="password">Contraseña</label>
                 <br /><br />
-                <input type="submit" name="login" id="login" value="Login" class="button" />
+                <input type="submit" name="login" id="login" value="Login" class="button"/>
             </div>
         </form><br />
         <p><a href="/password.php">¿Ha olvidado su contraseña?</a></p>

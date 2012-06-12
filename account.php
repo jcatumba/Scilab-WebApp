@@ -33,8 +33,8 @@
         }
         if(isset($_GET['codigo']) && $_GET['codigo']=="generado") 
         {
-            $code = $_GET['key'];
-            echo "<div class='message good'>El código de acceso generado es ".$code."</div>";
+            //$code = $_GET['key'];
+            //echo "<div class='info'>El código de acceso generado es ".$code."</div>";
         }
 ?>
  
@@ -76,6 +76,10 @@
             <input type="submit" name="getcode-submit" value="Generar" class="button"/>
         </div>
         </form>
+        <?php if(!empty($_GET['key'])) {
+                echo "El código creado es: ".$_GET['key'];
+            }
+        ?>
         <hr />
         <?php endif; ?>
             
@@ -91,7 +95,7 @@
                     name="delete-account-submit" id="delete-account-submit"
                     value="¿Borrar cuenta?" class="button"/>
                 <br /><br />
-                <p class="message bad">Todos sus archivos serán borrados. 
+                <p class="info">Todos sus archivos serán borrados. 
                 Se recomienda que los guarde en un lugar seguro.</p>
             </div>
         </form>
