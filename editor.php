@@ -9,8 +9,8 @@
 <div id="application" class="tabs">
     <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
     <label for="tab-1" class="tab-label-1"><?php echo $_GET['file']?></label>
-    <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
-    <label for="tab-2" class="tab-label-2">Consola</label>
+    <!--<input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
+    <label for="tab-2" class="tab-label-2">Consola</label>-->
     
     <div class="clear-shadow"></div>
     
@@ -51,7 +51,7 @@
                 };
             </script>
         </div><!--content-1-->
-        <div id="content-2">
+        <!--<div id="content-2">
             <div id="consola">
                 <pre id="consoleoutput"></pre>
             </div>

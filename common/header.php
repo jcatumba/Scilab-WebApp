@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/estilo.css" type="text/css" />
     <link rel="stylesheet" href="css/agrid.css" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/imagenes/favicon.ico" />
-    <!--<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>-->
 
     <!--JavaScript-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -30,6 +29,14 @@
     function fade(){
         $(".message").fadeOut(300);
     }
+    $("#getout").click(function () {
+        $.ajax({
+            url: "http://localhost:8000/logout",
+            type: "GET",
+            data: {},
+            dataType: "html"
+        });
+    });
     </script>
 </head>
 
@@ -48,7 +55,7 @@
                     $users = new ColoredListsUsers($db);
                     list($usuario, $homedir, $grupo, $shmid) = $users->retrieveAccountInfo();
                 ?>
-                    <p><a href="/account.php"><?php echo $usuario ?></a> | <a href="/logout.php">salir</a></p>
+                    <p><a href="/account.php"><?php echo $usuario ?></a> | <a href="/logout.php" id="getout">salir</a></p>
                 <?php else: ?>
                     <!--<p><a class="button" href="/signup.php">Sign up</a> &nbsp; <a class="button" href="/login.php">Log in</a></p>-->
                 <?php endif; ?>

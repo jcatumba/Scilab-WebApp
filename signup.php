@@ -14,7 +14,7 @@
             <div>
                 <input type="email" name="email" id="email" />
                 <label for="email">Email</label>
-                <span class="info">--> Campo no válido</span>
+                <span class="info">&mdash; Campo no válido</span>
                 <br /><br />
                 <input type="text" name="user" id="user" />
                 <label for="user">Usuario</label>
