@@ -8,6 +8,8 @@
     $middle="' />";
     $post="</label></li>";
 ?>
+    <script>
+    </script>
     <?php
         if(!empty($_GET['event'])){
             if($_GET['event']=="done"){

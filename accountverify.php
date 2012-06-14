@@ -27,7 +27,7 @@
         if($ret[0]<3):
 ?>
  
-        <h2>Choose a Password</h2>
+        <h2>Escoger una constraseña</h2>
  
         <form method="post" action="accountverify.php">
             <div>

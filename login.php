@@ -11,21 +11,11 @@
         include_once 'inc/class.users.inc.php';
         $users = new ColoredListsUsers($db);
         if($users->accountLogin()===TRUE):
-            echo "<script>\n"
-                . "$(document).ready(function()\n"
-                . "{\n"
-                . "\tvar login = $.ajax({\n"
-                . "\t\t url: \"http://localhost:8000/simple/login\",\n"
-                . "\t\t type: \"GET\",\n"
-                . "\t\t data: {username: ".$_POST['username'].", password: ".$_POST['password']."},\n"
-                . "\t\t dataType: \"json\"\n"
-                . "\t});\n"
-                . "});\n"
-                ."</script>";
+            echo "<h2>Hecho</h2>\n";
             header('Location: visordearchivos.php');
             exit;
         else:
-?>
+        ?>
                  
         <h2>Acceso fallido &mdash; ¿Desea intentar de nuevo?</h2>
         <form method="post" action="login.php" name="loginform" id="loginform">

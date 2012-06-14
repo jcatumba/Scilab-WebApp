@@ -144,7 +144,7 @@ class ColoredListsUsers
             
             $accept = 1;
             $shmkey = "";
-            $sql = "SELECT COUNT(shmid) AS contador FROM usuarios WHERE shmid=:shmkey";
+            /*$sql = "SELECT COUNT(shmid) AS contador FROM usuarios WHERE shmid=:shmkey";
             while ($accept==1) {
                 $shmkey = RandomString(6,FALSE);
                 if($stmt = $this->_db->prepare($sql)) {
@@ -156,7 +156,7 @@ class ColoredListsUsers
                     }
                     $stmt->closeCursor();
                 }
-            }
+            }*/
             
             $sql = "INSERT INTO usuarios (usuario,email,keyaccess,password,homedir,grupo,shmid) VALUES(:user,:email,:ver,MD5(:pass),:homedir,'usuario',:shm)";
             if($stmt = $this->_db->prepare($sql)) {
@@ -180,15 +180,15 @@ class ColoredListsUsers
                         ."        url: \"http://localhost:8000/register\",\n"
                         ."        crossDomain: true,\n"
                         ."        type: \"POST\",\n"
-                        ."        data: {username : ".$user.", password : ".$pass.", retype_password : ".$user."},\n"
+                        ."        data: {username : \"".$user."\", password : \"".$pass."\", retype_password : \"".$pass."\"},\n"
                         ."        dataType: \"json\"\n"
                         ."    });\n"
-                        ."    alert(request.getAllResponseHeaders());\n"
+                        ."    //alert(request.getAllResponseHeaders());\n"
                         ."    request.done(function() {\n"
-                        ."        alert(\"Se ha creado la cuenta\");\n"
+                        ."        //alert(\"Se ha creado la cuenta\");\n"
                         ."    });\n"
                         ."    request.fail(function(jqXHR, textStatus) {\n"
-                        ."        alert(\"Solicitud fallida (crear cuenta): \"+textStatus)\n"
+                        ."        //alert(\"Solicitud fallida (crear cuenta): \"+textStatus)\n"
                         ."    });\n"
                         ."}\n"
                         . "</script>\n";

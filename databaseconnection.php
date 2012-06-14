@@ -8,7 +8,7 @@
 
     $sql="SELECT * from usuarios;";
 
-    $resultado_set = pg_Exec ($conexion, $sql);
+    $resultado_set = pg_Exec($conexion, $sql);
     $filas = pg_NumRows($resultado_set);
 
     for ($j=0; $j < $filas; $j++) {
