@@ -5,3 +5,6 @@ is not available yet. It will have a language editor, a file viewer and a comman
 
 ## Comments
 Please feel free to post your comments and ideas creating an issue.
+
+## Warning
+This code might be lead to a security issues.
